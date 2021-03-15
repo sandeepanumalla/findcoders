@@ -10,60 +10,48 @@ export default function Search() {
     const [values, setValues] = useState({
         search:"",
         loading:false,
-        
+        error: false
     });
+
+    const [Items, setItems] = useState([]);
    
-    const prev = useRef(``);
+    const{loading,error} = values
+  
+    let cancelToken;
+    const handleSearchChange = async (e) => {
+      const searchTerm = e.target.value;     
+      if (typeof cancelToken != typeof undefined) {
+        cancelToken.cancel("Operation canceled due to new request.");
+        setValues({loading:true});
+      }
+  
+      cancelToken = axios.CancelToken.source();
+  
+      try {
+        const results = await axios.get(
+          `https://api.github.com/users/${searchTerm}`,
+          { cancelToken: cancelToken.token } //Pass the cancel token to the current request
+        );
+        setItems([results.data]);
 
-    const {search, loading} = values;
-    
-    const handleChange =(e)=>{
-        let name= e.target.name;
-        let value = e.target.value;
-        if(name == "search"){
-            setValues({...values,search:value});
-        }
-        
-    }
-    console.log(search);
-    
+        console.log("Results for " + searchTerm + ": ", results.data);
+        console.log("Results from " + "setItem" + ": ", results.data);
+      } catch (error) {
+        console.log(error);
+        setValues({error:true});
+      }
+    };
+
    
-
-    useEffect(()=>{
-        prev.current = search;
-        console.log(prev.current)
-        const searchUrl = `https://api.github.com/users/${search}`;
-      
-        
-
-        axios.get(searchUrl,{
-            cancelToken:prev.current.token
-        })
-        .then(res => console.log(res));
-        
-        
-            
-        /* fetch(`https://api.github.com/users/${search}`)
-        .then(response => response.json())
-        .then(json => console.log(json))
-        .catch((err)=>{
-          console.log(err)
-        }) */
-        
-        
-        
-    
-      
-      },[search])
     
     
     return (
         <div>
         <div className="search">
             <input  className="search_user" type="text" placeholder="search" 
-             onChange={(e)=>{handleChange(e)}} name="search"></input>
+             onChange={handleSearchChange} name="search"></input>
         </div>
-        <Result loading={loading} name={values.search} />
+        <Result  loading={loading} error={error} data={Items} />
         </div>
     )
 }
