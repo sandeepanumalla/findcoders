@@ -1,0 +1,25 @@
+.profile_container{
+    background-color: rgb(233, 249, 250);
+    display: flex;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    height: 90vh;
+}
+.main_container{
+    
+}
+
+.sub_container{
+    border: 1px solid black;
+    height:auto;
+    width:auto;
+}
+
+.profile_item{
+    height:3rem;
+    width: 35rem;
+    display: flex;
+    justify-content: space-around;
+}

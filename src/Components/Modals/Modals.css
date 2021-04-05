@@ -1,0 +1,124 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+    
+}
+
+.popup{
+    background: rgb(0, 0, 0, 0.5);
+    position: absolute;
+    top:0%;
+    left:0%;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+.popup-item{
+    position: absolute;
+    top:20%;
+    left:40%;
+    height:auto;
+    min-width: 30vw;
+    background-color:rgb(255, 255, 255);
+    border-radius:5px;
+    z-index: 10;
+   
+}
+
+.modal_title{
+    margin-top: .5rem;
+    color: black
+}
+
+.header{
+    display:flex;
+    justify-content:center;
+}
+
+.btn{
+    position:absolute;
+    left:85%;
+    top: .5rem;
+}
+.btn button{
+    border:none;
+    padding:.6rem;
+    font-size: larger;
+}
+
+.RepoModal_container{
+    height:auto;
+    width:100%;
+    
+    display:flex;
+    
+}
+.RepooModal_item{
+    height: 3rem;
+    border: 1px solid rgb(182, 182, 182);
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-radius: 2px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2px;
+    margin-right: 2px;
+
+}
+
+.RepooModal_item a{
+   font-weight: 700;
+   text-decoration: none;
+}
+
+.dialogue{
+    margin-top: 1rem;
+    height:5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 200;
+    
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+.btns{
+    height:4rem;
+    display: flex;
+    
+    justify-content:space-evenly;
+    align-items: center;
+}
+.btns button{
+    height: auto;
+   
+    border: none;
+   
+    border-radius: 5px;
+    padding:1rem;
+    font-weight: 700;
+    font-size: 1rem;
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.no{
+    background-color: #db2828;
+    color: #fff;
+    cursor: pointer
+}
+
+.yes{
+    background-color: #21ba45;
+    color: #fff;
+    cursor: pointer
+}
+.yes:hover{
+    background-color:rgba(8, 160, 8, 0.9);
+}
+.no:hover{
+    background-color: rgba(190, 6, 6, 0.9);
+}
