@@ -8,6 +8,9 @@ import AddProfilesAL from './Modals/AddProfilesAL';
 import CheckProfiles from '../profile_api/AddedProfile';
 import { connect } from 'react-redux';
 import { fetchCheckProfiles } from '../actions';
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import ModalBox from './Modals/Modals';
 
 
 
@@ -21,16 +24,17 @@ function Results({profiles,fetchCheckProfiles,props,data, loginname,loadingProps
         askLogin:false,
         data_login_name:"",
         effect:"",
-        already:true
+        already:true,
+        UnauthorizedAskLogin:false,
+        type:"",
+        typeoftype:""
     })
 
-    
+    const antIcon = <LoadingOutlined style={{ fontSize: 35 }} spin />;
 
-const {effect,data_login_name,check_profiles,already,Added,askLogin,addprofile_login,repo_data,viewRepoModal} = Items;
+const {typeoftype,type,UnauthorizedAskLogin,effect,data_login_name,check_profiles,already,Added,askLogin,addprofile_login,repo_data,viewRepoModal} = Items;
 
 console.log("repourl",repoUrl);
-
-
 
 console.log("error props in ",errorProps);
 
@@ -43,10 +47,13 @@ console.log("effect",effect);
 /* console.log("props set",props.setTriggerItem); */
 
 useEffect(() => {
-    fetchCheckProfiles()
+    fetchCheckProfiles();
+    setItems({Added:false});
  },[data])
 
-
+ const setAskLogin = () =>{
+    setItems({UnauthorizedAskLogin:true,type:"You are required to Login", typeoftype:"hello ji"});
+ }
 const {user} = isAuthenticated();
 const addUserOnCLick =async (a,b,c,d)=>{
     if(!isAuthenticated()){   
@@ -73,7 +80,7 @@ const addUserOnCLick =async (a,b,c,d)=>{
     }
 }
 
-console.log(viewRepoModal);
+console.log(Added);
 
 console.log(repoUrl);
 console.log(data);
@@ -88,7 +95,11 @@ console.log("profileReducer",profiles);
             <div className="container">
             {
                 loadingProps ? (
-                    <div key={11}><h2 key={12} >Loading..</h2></div>
+                    <div style={{"marginTop":"3rem"}}>
+                         <Spin className="spinner" indicator={antIcon} />
+                    </div>
+
+                    
                 ) :errorProps ?
                 (<div key={22} ><h2 key={23} >Not Found</h2></div>)
                 : initial ?
@@ -116,20 +127,27 @@ console.log("profileReducer",profiles);
                               </button>
                             
                             </div>
-                            <div key={3} className="like_container">
-                            
+                            <Fragment>
                             {
+                                isAuthenticated()?<div key={3} className="like_container">
+                            
+                                {
+                                   
+                                    Added || profiles.some(item => item.login_name == data.login) ? 
+                                        (<button key={4} disabled={true} className="add_btn" 
+                                        onClick={()=>addUserOnCLick(data.login,data.url,data.avatar_url,data.repos_url)} >
+                                        User Added</button>) :
+                                           (<button key={4} className="add_btn"
+                                           onClick={()=>addUserOnCLick(data.login,data.url,data.avatar_url,data.repos_url)} >
+                                           Add User</button>)
                                
-                                Added || profiles.some(item => item.login_name == data.login) ? 
-                                    (<button key={4} disabled={true} className="add_btn" 
-                                    onClick={()=>addUserOnCLick(data.login,data.url,data.avatar_url,data.repos_url)} >
-                                    User Added</button>) :
-                                       (<button key={4} className="add_btn"
-                                       onClick={()=>addUserOnCLick(data.login,data.url,data.avatar_url,data.repos_url)} >
-                                       Add User</button>)
-                           
-                              }
-                            </div>
+                                  }
+                                </div>:<button key={4} className="add_btn"
+                                onClick={()=>setAskLogin()} >
+                                Add User</button>
+                            }
+                            </Fragment>
+                            
                             
                            </div>
                            
@@ -137,12 +155,12 @@ console.log("profileReducer",profiles);
                  }))
                 }
                 <div>
-                
+                <ModalBox modal={UnauthorizedAskLogin} closeModal={setItems} typeOfModal={type} typeofT={typeoftype}></ModalBox>
                 <RepoModalBox  showModal={viewRepoModal} 
                             setTrigger={setItems} repoLink={repoUrl}></RepoModalBox>
     
                             
-                <AddProfilesAL setTrigger={setItems} modal={askLogin} ></AddProfilesAL>
+                
                             
                 </div>
 

@@ -6,17 +6,17 @@
 .search{
     display: flex;
     justify-content: center;
-
+    background-color:  aliceblue;
     height: 5rem;
 
 }
 
+
+
+
 .search_user{
-    display: flex;
-    margin-top: 1rem;
+    background-color: white;
    height: 2rem;
-   border-radius: 3px;
-    align-items: center;
-   
-    
+  max-width: 25%;
 }
+

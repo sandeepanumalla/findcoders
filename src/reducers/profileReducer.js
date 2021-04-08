@@ -4,7 +4,13 @@ const profileReducer = (state=[], action) =>{
     console.log("actios",action);
     switch(action.type){
         case 'FETCH_CHECKPROFILES': 
-            return action.payload;
+            if(action.payload === undefined){
+                console.log("actios",action.payload);
+                return action.payload = null;
+            }
+            else{
+                return action.payload;
+            }
             break;
         case 'DELETE_PROFILE' : {
             console.log("running delete profile reducer")
@@ -12,7 +18,7 @@ const profileReducer = (state=[], action) =>{
             break;
         }
 
-        default: return state
+        default: return state=null
     }
   /*   if(action.type === 'FETCH_CHECKPROFILES'){
         console.log("running profileReducer");

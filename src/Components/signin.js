@@ -1,9 +1,12 @@
-import react from 'react';
+import react, { Fragment } from 'react';
 import {useState} from 'react';
 import './signup.css';
 import {signin,authenticate,isAuthenticated} from '../auth_api/Auth';
+import { Alert } from 'antd';
 
- const Signin =(props)=>{
+
+
+ const Signin =({props,setModal,success})=>{
 
 const[values,setValues] = useState({
     username:"",
@@ -28,25 +31,50 @@ const onChangeHandler=(e)=>{
     }
 }
 
-
+/* console.log("showmodal signup",showModal) */
 const onSubmit =()=>{
-    if(username=="" || password=="" ){
-        setValues({error:true, errorMsg:"Input field should not be empty"})
+    if(username==undefined || password==undefined ){
+        setValues({...values,error:true, errorMsg:"Input field should not be empty"})
+    }
+    else if( username.length< 3 ){
+        setValues({...values,error:true, errorMsg:"username must be at least 3 characters"})
+    }
+    else if( password.length<3){
+        setValues({...values,error:true, errorMsg:"password must be at least 3 characters"})
     }
     else{
         console.log("running else")
         signin({username,password})
-        .then((data)=>{console.log(data);
-        authenticate(data);
-        if(isAuthenticated()){
-            setValues({error:false})
-        }
+        .then((data)=>{ 
+            if(data === undefined){
+                setValues({error:true,errorMsg:"Server is not working properly"})
+            }
+            else if(data === "incorrect Username" || data === "Incorrect  password"){
+                setValues({...values,error:true, errorMsg:"Errors with submission"})
+            }
+            else{
+                authenticate(data);
+               
+            }
+            console.log(isAuthenticated());
+            if(isAuthenticated()){
+                console.log('reunnin')
+                return setModal({showModal:false,onSigninSuccess:true})
+        
+               }
+            console.log("data,",data)
+            })
+        
+        .catch((err)=>{
+            if(err){
+                setValues({error:true,errorMsg:"Something went wrong!"})
+            }
+            console.log("error in signup",err)})
+
+            
+    
     }
-        )
-        .catch((err)=>{console.log("error in signup",err)
-    setValues({error:true,errorMsg:"error in signing up"})
-    });
-    }
+    
     
 }
 
@@ -70,9 +98,43 @@ const onSubmit =()=>{
           
          </form>
          <button className="submit_btn" cursor="pointer" onClick={()=>{onSubmit()}} type="submit">Submit</button>
-         <p style={{color: 'black'}} >{JSON.stringify(values)}</p>
+         <Fragment>
+         {
+             error ?
+             <Alert message={errorMsg} type="error" />:null
+         }
+         </Fragment>
+         
          </div>
-    )
-}
+         )
+        }
+        
+        export default Signin;
+        /* <p style={{color: 'black'}} >{JSON.stringify(values)}</p> */
 
-export default Signin;
+
+        /* 
+         .then((data)=>{
+            console.log("data",data)
+            if(data === "incorrect Username" || data === "Incorrect  password"){
+                setValues({...values,error:true, errorMsg:"Errors with submission"})
+            }
+            else{
+                authenticate(data);
+            }
+        
+        if(isAuthenticated()){
+            
+             return setModal({showModal:false,onSigninSuccess:true})
+
+        }
+       }
+        )
+        .catch((err)=>{
+            if(err){
+                setValues({error:true,errorMsg:"Server is not working properly"})
+            }
+            console.log("error in signin",err)
+    setValues({error:true,errorMsg:"error in signing "})
+    })
+        */

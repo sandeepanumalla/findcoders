@@ -1,14 +1,14 @@
 import React from 'react';
 import './Modals.css';
 
-const AskLogin = (props) => {
+const AskLogin = ({props,setModal}) => {
 
     const setModalForLogin =()=>{
-        return props.setModal({showModal:true,type:"SignIn"})
+        return setModal({showModal:false})
     }
 
     const closeModalForNo =()=>{
-        return props.setModal({showModal:false});
+        return setModal({showModal:false});
     }
 
     return (

@@ -64,7 +64,9 @@ const onSubmit =()=>{
           <h2  className="modal_title" >{props.typeOfModal} </h2>
           <span className="btn">
           {
-            props.typeOfModal == "You are required to Login First"?null:
+            props.typeOfModal == "You are required to Login First" || 
+            props.typeOfModal == "You are required to Login"
+            ?null:
             <button onClick={()=>{props.setTrigger(false)}}>X</button>
           }
           </span>
@@ -72,16 +74,36 @@ const onSubmit =()=>{
        <div>
        {
         props.typeOfModal == "SignUp" ?
-        <Signup formType={props.typeOfModal} ></Signup>
+        <Signup  setModal={props.setTrigger} formType={props.typeOfModal} ></Signup>
         : null || props.typeOfModal == "SignIn"?
-        <SignIn formType={props.typeOfModal} ></SignIn>
+        <SignIn  setModal={props.setTrigger} formType={props.typeOfModal} ></SignIn>
         :null || props.typeOfModal == "You are required to Login First"?
-        <AskLogin setModal={props.setTrigger} ></AskLogin>:null
+        <AskLogin  setModal={props.setTrigger} ></AskLogin>:null ||
+         props.typeOfModal == "You are required to Login"?
+         <AddProfilesAL setModal={props.closeModal}></AddProfilesAL>:null
        }
        </div>
 
        </div>
-       <div className="popup" onClick={()=>{props.setTrigger({showModal:false})}} ></div>
+       {
+        
+        props.typeOfModal == "SignUp"?
+        <div className="popup" onClick={()=>{props.setTrigger({showModal:false})}} ></div>:
+        null
+         ||
+         props.typeOfModal == "SignIn"?
+        <div className="popup" onClick={()=>{props.setTrigger({showModal:false})}} ></div>:
+        null|| 
+        props.typeOfModal == "You are required to Login First"?
+        <div className="popup" onClick={()=>{props.setTrigger({showModal:false})}} ></div>:
+        null
+        ||  
+        props.typeOfModal == "You are required to Login"?
+        <div className="popup" onClick={()=>{props.closeModal({UnauthorizedAskLogin:false})}} ></div>:
+        null
+       
+       }
+       
       
        </div>
     :  ""
@@ -121,3 +143,4 @@ const onSubmit =()=>{
 
         </form>
 } */
+

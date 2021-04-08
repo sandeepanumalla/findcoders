@@ -1,11 +1,16 @@
-import React,{Fragment} from 'react';
+import React,{Fragment,useState,useEffect} from 'react';
 import "./base.css";
 import { signout,isAuthenticated} from '../auth_api/Auth'
 import { Redirect, useHistory } from 'react-router';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Nav = (props) => {
+
+  const [authenticated,setAuthenticated] = useState(true)
+
   let history = useHistory();
 
     const setModelHandlerSignUp =() =>{
@@ -33,36 +38,51 @@ const Nav = (props) => {
 
       const onSignout =()=>{
         console.log('onSubmit running');
-       
-        
+
         signout()
-        .then(()=>{console.log("signed out successfully")})
+        .then(()=>{setAuthenticated(false)})
         .catch(()=>{console.log("error in signout")});
     }
+
+      useEffect(() => {
+        if(authenticated === false){
+          return toast.success('🦄 Sign out success!', {
+            position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+        }
+      },[authenticated])
+
+     
 
     return (
         <div>
         <nav>
-        
+        <ToastContainer />
           <div className="logo">Github</div>
           <ul className="nav_links">
           
-          <li onClick={()=>{goToHome()}} ><button>Home</button></li>
+          <li  ><a className="btns" onClick={()=>{goToHome()}}>Home</a></li>
           <li>
-          <button  onClick={()=>setModalProfile()}>Saved Profile</button>
+          <a className="btns" onClick={()=>setModalProfile()}>Saved Profile</a>
           </li>
           {
             isAuthenticated() ?
             (<li>
-              <button onClick={()=>onSignout()}>Signout</button>
+              <a className="btns" onClick={()=>onSignout()}>Signout</a>
               </li>
               ):
             (<Fragment>
               <li>
-                 <button onClick={()=>{setModelHandlerSignUp()}}>Sign Up</button>
+                 <a className="btns" onClick={()=>{setModelHandlerSignUp()}}>Sign Up</a>
               </li>
                <li>
-                 <button  onClick={()=>{setModelHandlerSignIn()}}>Login</button>
+                 <a className="btns" onClick={()=>{setModelHandlerSignIn()}}>Login</a>
                </li>
               </Fragment>
               )

@@ -10,11 +10,15 @@ export const signin = user => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(user) 
-    }).then(data =>{
-      return data.json()
     })
-    .then(data => {return data})
-    .catch(err =>{ return err} )
+    .then(response => {
+      console.log(response)
+      /* .catch(err =>console.log("eror in signup",err)); */
+      
+      return response.json();
+  
+    })
+    .catch(err =>console.log("eror in signin",err))
   }
   
 
@@ -29,6 +33,7 @@ export const signup = user => {
     body: JSON.stringify(user)
   }).then(response => {
       console.log(response)
+      .catch(err =>console.log("eror in signup",err));
       
       return response.json();
   

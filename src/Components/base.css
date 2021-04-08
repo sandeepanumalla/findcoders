@@ -7,19 +7,22 @@
 nav{
     display: flex;
     justify-content: space-around;
-    background-color: #64B5F6;
+   
     color: white;
 }
 
 .logo{
-    font-size: 2rem;
+    position: relative;
+    right: 10%;
+    font-size: 3rem;
+    color: black;
     
 }
 
 .nav_links{
     list-style: none;
     display: flex;
-    
+    min-width: 30%;
     align-items: center;
     width: 16rem;
     justify-content: space-evenly;
@@ -43,12 +46,19 @@ nav{
 .heading_animation{
     height: 6rem;
     display: flex;
-    
+    background-color: aliceblue;
     justify-content: center;
-    background-color: violet;
+
 }
 
 .heading_animation h2{
     display: flex;
     align-items: center;
 }
+
+.btns{
+    font-size:1.25rem;
+   color: black;
+   margin-left: .5rem;
+}
+

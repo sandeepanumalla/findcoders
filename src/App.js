@@ -4,9 +4,8 @@ import './App.css';
 import Base from './Components/base';
 import {BrowserRouter as Router,Route,Switch, Redirect} from 'react-router-dom';
 import profile from './Components/profiles';
-import { isAuthenticated } from './auth_api/Auth';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
+
+import protectedRoutes from './protectedRoutes';
 
 
 
@@ -19,7 +18,7 @@ const App = () =>{
         <Router>
         <Route exact path="/home" component={Base}></Route>
         <Route exact path="/profiles" component={profile}></Route>
-        <Redirect path="/home" />
+        <Redirect to="/home" />
       </Router>
  
    

@@ -3,6 +3,8 @@ import './Search.css';
 import Result from './Results';
 import axios from 'axios';
 import CheckProfiles from '../profile_api/AddedProfile';
+import { Input } from 'antd';
+import 'antd/dist/antd.css';
 
 
 
@@ -129,13 +131,18 @@ console.log("repos_url",repos_url);
     return (
         <div>
         <div className="search">
-            <input  className="search_user" type="text" placeholder="search" 
-            value={Term}
-            onChange={(e) => setTerm(e.target.value)} name="search"></input>
-             
+            
+             <Input  className="search_user"  onChange={(e) => setTerm(e.target.value)} name="search" placeholder="Search"></Input>
         </div>
         <Result setTriggerItem={props.setTrigger} loginname={login_name} initial={first} repoUrl={repos_url} loadingProps={loading} errorProps={error} data={Items} />
         
         </div>
     )
 }
+
+
+/* 
+<input  className="search_user" type="text" placeholder="search" 
+            value={Term}
+            onChange={(e) => setTerm(e.target.value)} name="search"></input>
+*/
