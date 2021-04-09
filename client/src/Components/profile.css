@@ -1,0 +1,80 @@
+.profile_container{
+    background-color: rgb(233, 249, 250);
+    display: flex;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    height: 90vh;
+}
+.main_container{
+    display: flex;
+    align-items:center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sub_container{
+   
+    height:auto;
+    width:auto;
+}
+
+.profile_item{
+    height:3rem;
+    width: 35rem;
+    display: flex;
+    margin: .5rem;
+    border: 1px solid black;
+    justify-content: space-evenly;
+}
+
+.table_body{
+    margin-top: 1rem;
+
+}
+.anticon{
+    font-size:xx-large;
+    
+}
+.table{
+    height: 60%;
+    width: 70%;
+    
+}
+thead{
+    font-size:1.3rem;
+    font-weight:700;
+    
+   
+}
+
+th{
+
+    border-top: 2px solid #8f8f8f;
+    border-bottom: 2px solid #8f8f8f;
+    padding-top:.6rem;
+    padding-bottom:.6rem
+}
+
+th h3{
+    position:relative;
+    left:5rem;
+}
+
+td{
+    padding-top:.6rem;
+    font-size:1rem;
+    border-bottom: 2px solid #dee2e6;
+    
+}
+.td_delete{
+    overflow:hidden;
+   position: relative;
+   left: 1rem; 
+}
+
+.t_body{
+    position: relative;
+    left:5rem
+}
