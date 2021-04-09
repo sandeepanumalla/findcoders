@@ -29,7 +29,7 @@ app.get("/",(req,res)=>{
 
 
 if(process.env.NODE_ENV === 'production'){
-
+console.log("running production true");
   app.use(express.static('client/build'));
   
   app.get('*',(req,res)=>{
