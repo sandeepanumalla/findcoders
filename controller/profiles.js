@@ -3,7 +3,6 @@ var app =new express();
 const User = require("../models/user");
 const bodyParser = require('body-parser');
 const { findOneAndDelete, findOneAndUpdate, findById } = require('../models/user');
-const { ItemMeta } = require('semantic-ui-react');
 
 
 exports.addProfiles=async (req,res)=>{

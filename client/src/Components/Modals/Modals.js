@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import CloseModel from '../closeModel';
+
 import './Modals.css';
 
 import Signup from '../signup';

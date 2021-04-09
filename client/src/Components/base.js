@@ -1,7 +1,7 @@
 
 import React,{Fragment, useState,useEffect} from 'react'
 import "./base.css";
-import CloseModel from './closeModel';
+
 import ModalBox from './Modals/Modals';
 import Search from './Search'
 import { isAuthenticated, signout} from '../auth_api/Auth'
