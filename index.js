@@ -36,6 +36,10 @@ console.log("running production true");
     res.sendFile(path.join(__dirname,'client','build','index.html'));
   })
 
+}else{
+  app.get("/", (req,res)=>{
+    res.send("Api running");
+  })
 }
 
 const port = process.env.PORT || 8000
