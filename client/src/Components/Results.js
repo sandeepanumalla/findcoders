@@ -34,15 +34,15 @@ function Results({profiles,fetchCheckProfiles,props,data, loginname,loadingProps
 
 const {typeoftype,type,UnauthorizedAskLogin,effect,data_login_name,check_profiles,already,Added,askLogin,addprofile_login,repo_data,viewRepoModal} = Items;
 
-console.log("repourl",repoUrl);
+/* console.log("repourl",repoUrl);
 
-console.log("error props in ",errorProps);
+console.log("error props in ",errorProps); */
 
 const openModal =()=>{
     setItems({viewRepoModal:true,effect:"open"});
 }
 
-console.log("effect",effect);
+/* console.log("effect",effect); */
 
 /* console.log("props set",props.setTriggerItem); */
 
@@ -57,7 +57,7 @@ useEffect(() => {
 const {user} = isAuthenticated();
 const addUserOnCLick =async (a,b,c,d)=>{
     if(!isAuthenticated()){   
-        console.log("running")
+       /*  console.log("running") */
         setItems({askLogin:true});
     }
     else{
@@ -68,7 +68,7 @@ const addUserOnCLick =async (a,b,c,d)=>{
         const repos_url = d;
         AddProfile({login_name,url,avatar_url,repos_url})
         .then((e)=> e.json())
-        .then(data =>{console.log(data)
+        .then(data =>{/* console.log(data) */
             if(data === "Added profile successfully with status 200"){
                 setItems({Added:true});
             
@@ -76,17 +76,17 @@ const addUserOnCLick =async (a,b,c,d)=>{
         )
         .catch(err => console.log(err)
         )
-        console.log("data in results",a,addprofile_login);
+       /*  console.log("data in results",a,addprofile_login); */
     }
 }
 
-console.log(Added);
+/* console.log(Added);
 
 console.log(repoUrl);
 console.log(data);
-console.log("profileReducer",profiles);
+console.log("profileReducer",profiles); */
 
-
+/* console.log(repoUrl); */
     const [info, setInfo] = useState([]);
    
     return (
@@ -125,14 +125,13 @@ console.log("profileReducer",profiles);
                               </path>
                               </svg> Repositories
                               </button>
-                            
                             </div>
                             <Fragment>
                             {
                                 isAuthenticated()?<div key={3} className="like_container">
                             
                                 {
-                                   
+
                                     Added || profiles.some(item => item.login_name == data.login) ? 
                                         (<button key={4} disabled={true} className="add_btn" 
                                         onClick={()=>addUserOnCLick(data.login,data.url,data.avatar_url,data.repos_url)} >
@@ -140,7 +139,6 @@ console.log("profileReducer",profiles);
                                            (<button key={4} className="add_btn"
                                            onClick={()=>addUserOnCLick(data.login,data.url,data.avatar_url,data.repos_url)} >
                                            Add User</button>)
-                               
                                   }
                                 </div>:<button key={4} className="add_btn"
                                 onClick={()=>setAskLogin()} >
@@ -156,16 +154,13 @@ console.log("profileReducer",profiles);
                 }
                 <div>
                 <ModalBox modal={UnauthorizedAskLogin} closeModal={setItems} typeOfModal={type} typeofT={typeoftype}></ModalBox>
-                <RepoModalBox  showModal={viewRepoModal} 
-                            setTrigger={setItems} repoLink={repoUrl}></RepoModalBox>
-    
-                            
                 
-                            
+         
                 </div>
 
             </div>
-                
+            <RepoModalBox  showModal={viewRepoModal} 
+            setTrigger={setItems} repo_link={repoUrl}></RepoModalBox>
         </div>
         
     )

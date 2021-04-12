@@ -4,8 +4,9 @@ import './App.css';
 import Base from './Components/base';
 import {BrowserRouter as Router,Route,Switch, Redirect} from 'react-router-dom';
 import profile from './Components/profiles';
+import PrivateRoutes from './auth_api/ProtectedRoutes';
 
-import protectedRoutes from './protectedRoutes';
+
 
 
 
@@ -16,9 +17,11 @@ const App = () =>{
   return(
 
         <Router>
-        <Route exact path="/home" component={Base}></Route>
-        <Route exact path="/profiles" component={profile}></Route>
-        <Redirect to="/home" />
+        <Switch>
+          <Route exact path="/" component={Base}></Route>
+          <PrivateRoutes exact path="/profiles" component={profile}></PrivateRoutes>
+          <Redirect to="/"/>
+        </Switch>
       </Router>
  
    

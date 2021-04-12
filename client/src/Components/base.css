@@ -7,8 +7,7 @@
 nav{
     display: flex;
     justify-content: space-around;
-   
-    color: white;
+    align-items: center;
 }
 
 .logo{
@@ -61,4 +60,21 @@ nav{
    color: black;
    margin-left: .5rem;
 }
+.navBar{
+    display:none
+}
 
+@media (max-width:480px){
+    .nav_links{
+        display:none;
+    }
+    .navBar{
+        display:flex
+    }
+    .logo{
+        position: unset;
+        font-size: 3rem;
+        color: black;
+    }
+    
+}

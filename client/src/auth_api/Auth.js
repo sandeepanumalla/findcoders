@@ -1,9 +1,12 @@
 
 import axios from 'axios';
 import base from "../Components/base"
+const port = process.env.PORT;
+export const BASE_URL = "http://localhost:5001"
 
+console.log("process ",port);
 export const signin = user => {
-    return fetch(`http://localhost:8080/api/users/signin`, {
+    return fetch(`/api/users/signin`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -14,7 +17,7 @@ export const signin = user => {
     .then(response => {
       console.log(response)
       /* .catch(err =>console.log("eror in signup",err)); */
-      
+       
       return response.json();
   
     })
@@ -24,20 +27,14 @@ export const signin = user => {
 
 export const signup = user => {
   console.log("signup",user);
-  return fetch(`http://localhost:8080/api/users/signup`, {
+  return fetch(`/api/users/signup`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json"
     },
     body: JSON.stringify(user)
-  }).then(response => {
-      console.log(response)
-      .catch(err =>console.log("eror in signup",err));
-      
-      return response.json();
-  
-    })
+  }).then(response => response)
     .catch(err => console.log(err));
 };
 
@@ -57,7 +54,7 @@ export const signout = next => {
     localStorage.removeItem("jwt");
    
 
-    return fetch(`http://localhost:8080/api/users/signout`, {
+    return fetch(`${BASE_URL}/api/users/signout`, {
       method: "GET"
     })
       .then(response => console.log("signout success"))
@@ -77,31 +74,5 @@ export const isAuthenticated = () => {
 };
 
 
-export const api = axios.create({
-  baseURL: 'http://localhost:8080/api/users',
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${isAuthenticated().token}`
-  }
-})
-
-export const courses = async () => {
-  
-  return await fetch(`http://localhost:8001/api/users/all-posts`, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify()
-  })
-    .then(response => {
-      return response.json();
-      console.log(response.json())
-    })
-    .catch(err => console.log(err));
- 
-};
 
 

@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import CloseModel from '../closeModel';
+
 import './Modals.css';
 
 import Signup from '../signup';
@@ -58,8 +58,8 @@ const onSubmit =()=>{
     <div>
      {props.modal ? 
      
-      <div>
-       <div className="popup-item">
+      <div className="popup-parent" >
+       <div className="popup-item repo_first">
         <div className="header">
           <h2  className="modal_title" >{props.typeOfModal} </h2>
           <span className="btn">
@@ -85,6 +85,7 @@ const onSubmit =()=>{
        </div>
 
        </div>
+      
        {
         
         props.typeOfModal == "SignUp"?

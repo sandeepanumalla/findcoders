@@ -100,3 +100,11 @@ font-size: 1.2rem;
     margin-top: .5rem;
 font-weight: 500;
 }
+
+
+@media (max-width:480px) {
+    .item_container{
+        width: 80%;
+    }
+    
+}

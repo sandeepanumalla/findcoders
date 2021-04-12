@@ -2,15 +2,16 @@ import React,{Fragment,useState,useEffect} from 'react';
 import "./base.css";
 import { signout,isAuthenticated} from '../auth_api/Auth'
 import { Redirect, useHistory } from 'react-router';
-
+import {FaBars} from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import SideBar from './sideBar';
+import {AiOutlineMenu} from 'react-icons/ai'
 
 const Nav = (props) => {
 
   const [authenticated,setAuthenticated] = useState(true)
-
+  const [sideBar,setSideBar] = useState(false);
   let history = useHistory();
 
     const setModelHandlerSignUp =() =>{
@@ -21,27 +22,30 @@ const Nav = (props) => {
       }
 
       const setModalProfile = () =>{
-        console.log("sdfdf",isAuthenticated);
+       /*  console.log("sdfdf",isAuthenticated) */;
         if(!isAuthenticated()){
           return props.setTrigger({showModal:true,type:"You are required to Login First"});
         }
         if(isAuthenticated()){
-          console.log("running");
+        /*   console.log("running"); */
           return history.push("/profiles")
         }
         
       }
     
       const goToHome = () =>{
-        history.push("/home");
+        history.push("/");
       }
 
       const onSignout =()=>{
-        console.log('onSubmit running');
-
+       /*  console.log('onSubmit running'); */
+        <Redirect to="/"/>
         signout()
         .then(()=>{setAuthenticated(false)})
         .catch(()=>{console.log("error in signout")});
+    }
+    const showSideBar =() =>{
+      setSideBar(true);
     }
 
       useEffect(() => {
@@ -89,7 +93,12 @@ const Nav = (props) => {
           }
          
           </ul>
-        </nav>
+          <div>
+          <AiOutlineMenu className="navBar" onClick={()=>{showSideBar()}} style={{width:"2rem",height:"4rem"}}></AiOutlineMenu>
+          </div>
+      
+        </nav>            
+        <SideBar setTriggerValue={props.setTrigger} setValueSidebar={setSideBar} sideBarValue={sideBar}></SideBar>
         </div>
     )
 }

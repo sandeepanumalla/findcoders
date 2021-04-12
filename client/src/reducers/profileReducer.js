@@ -1,11 +1,11 @@
 
 
 const profileReducer = (state=[], action) =>{
-    console.log("actios",action);
+    /* console.log("actios",action); */
     switch(action.type){
         case 'FETCH_CHECKPROFILES': 
             if(action.payload === undefined){
-                console.log("actios",action.payload);
+               /*  console.log("actios",action.payload); */
                 return action.payload = null;
             }
             else{
@@ -13,7 +13,7 @@ const profileReducer = (state=[], action) =>{
             }
             break;
         case 'DELETE_PROFILE' : {
-            console.log("running delete profile reducer")
+           /*  console.log("running delete profile reducer") */
             return state.filter(profile => profile.login_name !== action.payload);
             break;
         }
