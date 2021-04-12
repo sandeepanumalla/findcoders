@@ -6,7 +6,7 @@ import {signup} from '../auth_api/Auth';
 import { Alert } from 'antd';
 
 
-const Signup = (props) =>{
+const Signup = ({props,setModal}) =>{
 
     const [values,setValues] = useState({
         username:"",
@@ -23,8 +23,8 @@ const Signup = (props) =>{
     const handleChange = (event) =>{
         const name = event.target.name;
         const value = event.target.value;
-        console.log(name);
-        console.log(value);
+        /* console.log(name);
+        console.log(value); */
         if(name == "username"){
             console.log("running")
             setValues({...values,username: value})
@@ -38,7 +38,7 @@ const Signup = (props) =>{
     }
 
     const onSubmit =()=>{
-        console.log("running onsubmit")
+        /* console.log("running onsubmit") */
         if(confirm_password == ""){
             console.log("confirm_password");
         }
@@ -56,18 +56,25 @@ const Signup = (props) =>{
         }
         else{
             if(password == confirm_password){
-                console.log("running else")
+               /*  console.log("running else") */
             signup({username,password})
-            .then((response,error)=>{
-                console.log("error,",error)
+            .then((response)=>{
+
+           if(response.status == 200 && response.statusText == "OK"){
+            return setModal({showModal:false,onSignupSuccess:true})
+           }
+           else{
+            setValues({error:true,errorMsg:"Something went wrong!"})
+           }
+               /*  console.log("rsponse,",response); */
                 response.json()})
-            .then((data)=>{console.log(data)
+            .then((data)=>{/* console.log(data) */
             })
             .catch((err)=>{
                 if(err){
                     setValues({error:true,errorMsg:"Something went wrong!"})
                 }
-                console.log("error in signup",err)});
+              /*   console.log("error in signup",err) */});
             }
             else{
                 setValues({...values, error:true, errorMsg:"confirm password should match"})

@@ -1,0 +1,34 @@
+.nav_links_sidebar{
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(220, 234, 247);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    justify-content: center;
+    top: 0%;
+ 
+    left: -100%;
+    transition: all 280ms ease-in-out;
+}
+.nav_links_sidebar.active{
+    left:0;
+    transition: all 280ms ease-in-out;
+}
+.btns_sidebar{
+    color: black;
+    font-size: 1.7rem;
+}
+li{
+    margin-top: 1.5rem;
+    list-style: none;
+    list-style-type: none;
+}
+
+.nav_links_ul{
+    height:100%;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}

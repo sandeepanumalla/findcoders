@@ -43,7 +43,7 @@ const onSubmit =()=>{
         setValues({...values,error:true, errorMsg:"password must be at least 3 characters"})
     }
     else{
-        console.log("running else")
+       /*  console.log("running else") */
         signin({username,password})
         .then((data)=>{ 
             if(data === undefined){
@@ -56,20 +56,20 @@ const onSubmit =()=>{
                 authenticate(data);
                
             }
-            console.log(isAuthenticated());
+           /*  console.log(isAuthenticated()); */
             if(isAuthenticated()){
-                console.log('reunnin')
+              /*   console.log('reunnin') */
                 return setModal({showModal:false,onSigninSuccess:true})
         
                }
-            console.log("data,",data)
+           /*  console.log("data,",data) */
             })
         
         .catch((err)=>{
             if(err){
                 setValues({error:true,errorMsg:"Something went wrong!"})
             }
-            console.log("error in signup",err)})
+            /* console.log("error in signup",err) */})
 
             
     
@@ -99,10 +99,10 @@ const onSubmit =()=>{
          </form>
          <button className="submit_btn" cursor="pointer" onClick={()=>{onSubmit()}} type="submit">Submit</button>
          <Fragment>
-         {
-             error ?
-             <Alert message={errorMsg} type="error" />:null
-         }
+            {
+                error ?
+                <Alert message={errorMsg} type="error" />:null
+            }
          </Fragment>
          
          </div>

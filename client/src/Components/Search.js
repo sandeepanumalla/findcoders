@@ -29,8 +29,8 @@ export default function Search(props) {
    
     const {check_profiles,login_name,first,repos_data,repos_url,loading,error} = values;
   
-    console.log("props.settrigger",props.setTrigger);
-      console.log("serach term",Term);
+    /* console.log("props.settrigger",props.setTrigger);
+      console.log("serach term",Term); */
 
       useEffect(() => {
         const timerId = setTimeout(() => {
@@ -69,17 +69,17 @@ export default function Search(props) {
 
     useEffect(()=>{
       const fetchData = async() =>{
-        console.log(debouncedTerm.length);
+       /*  console.log(debouncedTerm.length); */
         if(debouncedTerm.length === 0 || debouncedTerm === ""){
-          console.log("response not ok ")
+        /*   console.log("response not ok ") */
            return setValues({first:true});
         }
         else{
           await fetch(`https://api.github.com/users/${debouncedTerm}`)
         .then((response) =>{
-          console.log(response);
+       /*    console.log(response); */
           if(response.ok === false){
-            console.log("response not ok ")
+           /*  console.log("response not ok ") */
             setValues({error:true});
           }
           return response.json();
@@ -87,7 +87,7 @@ export default function Search(props) {
         )
         .then((data) =>{console.log(data);
             if(data.message === "Not Found"){
-                console.log("response not ok ")
+             /*    console.log("response not ok ") */
                 setValues({error:true});
               }
               else{
@@ -96,10 +96,10 @@ export default function Search(props) {
                       setValues({repos_url:data.repos_url})
                     },10)
                     
-                    console.log(Items) 
+                   /*  console.log(Items) 
                     console.log(data);
                     console.log("this is repos_url",repos_url);
-                    console.log(data.repos_url);
+                    console.log(data.repos_url); */
               }
         })
         
@@ -117,17 +117,17 @@ export default function Search(props) {
        fetchData();
        
        setValues({loading:false});
-      console.log("fetching in 1.3 seconds");
+    /*   console.log("fetching in 1.3 seconds"); */
       },500)
-      console.log("running effect");
+     /*  console.log("running effect"); */
 
       return () =>{
         clearTimeout(timeoutId);
-        console.log("cleanup");
+      /*   console.log("cleanup"); */
       }
 
     },[debouncedTerm])
-console.log("repos_url",repos_url);
+/* console.log("repos_url",repos_url); */
     return (
         <div>
         <div className="search">

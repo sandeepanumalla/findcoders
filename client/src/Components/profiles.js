@@ -32,17 +32,17 @@ useEffect(() =>{
 
   fetchCheckProfiles()
   
-})
+},[])
 
 
 
 const removeUser = (login_name) => {
-  console.log("removeUser",login_name);
+  /* console.log("removeUser",login_name); */
 deleteProfile({login_name})
 .then(response =>{
   
   if(response.status === 200){
-    console.log("running")
+    /* console.log("running") */
   dispatch(deleteProfileFromStore(login_name));
   }})
 .catch(err =>console.error(err))
@@ -54,7 +54,10 @@ deleteProfile({login_name})
         
         <div>
             <Nav></Nav>
-            <div className="main_container">
+            {
+              profiles != null ?
+              (<div>
+              <div className="main_container">
                 <div className="title_header">
                 <h1  className="title">Saved Profiles</h1>
                 </div>
@@ -68,21 +71,28 @@ deleteProfile({login_name})
                   </tr>
                 </thead>
                 <tbody>
-                {
-                   profiles.map(profile =>{
-                    return <tr>
-                    
-                    <td><p className="t_body">{profile.login_name}</p></td>
-                    <td className="td_delete"><span className="t_body"><DeleteTwoTone onClick={()=>{removeUser(profile.login_name)}}/></span></td>
-                    
-                  </tr>
-                  })
-                }
+                
+                { 
                   
                   
+                    profiles.map(profile =>{
+                      return <tr>
+                      
+                      <td><p className="t_body">{profile.login_name}</p></td>
+                      <td className="td_delete"><span className="t_body"><DeleteTwoTone onClick={()=>{removeUser(profile.login_name)}}/></span></td>
+                      
+                    </tr>
+                    })
+                  }
+
+                   
                 </tbody>
               </table>
           </div>
+          </div>)
+        : 
+        <h2>No saved profiles</h2>
+        }
         </div>
     )
 }

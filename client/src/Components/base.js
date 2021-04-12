@@ -8,14 +8,14 @@ import { isAuthenticated, signout} from '../auth_api/Auth'
 import Nav from './nav';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import SideBar from './sideBar';
 
 
 export default function Base() {
   
   const [values, setValues] = useState({
     showModalSignup : false,
-    showModalSignin : false,
+    showModalSignin : false, 
     show:"",
     password:"",
     errorSignup:"",
@@ -27,26 +27,27 @@ export default function Base() {
     type:"",
     showModal:false,
     onSigninSuccess:false,
+    onSignupSuccess:false,
     dataInfo:"",
     type:"",
     username : "new_user1",
     password : "new_user_password",
     showModalSignIn:false
   });
-  
+  const [sideBar,setSideBar] = useState(false);
 const {User} = isAuthenticated();
 
   const{showModalSignup,showPopup,showModalSignin,successLogin, errorSignup, successSignup} = values;
 
-  const {onSigninSuccess,username,password,type,showModal,showModalSignIn} = modal;
+  const {onSignupSuccess,onSigninSuccess,username,password,type,showModal,showModalSignIn} = modal;
 
   const notify = () => toast("Wow so easy!");
 
-console.log("showmodal",showModal);
+/* console.log("showmodal",showModal);
 console.log("username",username);
 console.log("isAuthenticated",isAuthenticated());
-console.log("insdfing",onSigninSuccess);
- 
+console.log("insdfing",onSigninSuccess); */
+
 useEffect(() => {
   if(onSigninSuccess){
 
@@ -61,8 +62,19 @@ useEffect(() => {
       });
     
   }
+  else if(onSignupSuccess){
+    return toast.success('🦄 Sign up success. Please Login', {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true, 
+      draggable: true,
+      progress: undefined,
+      });
+  }
 
-},[onSigninSuccess])
+},[onSigninSuccess,onSignupSuccess])
 
 
  
@@ -70,15 +82,17 @@ useEffect(() => {
         <div>
         <ToastContainer />
         <ModalBox modal={showModal} data={setModal} 
-        typeOfModal={type} onSuccess={onSigninSuccess} setTrigger={setModal}></ModalBox>
-            <Nav  setTrigger={setModal}></Nav>
+        typeOfModal={type} onSignup={onSignupSuccess} onSuccess={onSigninSuccess} setTrigger={setModal}></ModalBox>
+            <Nav  setTrigger={setModal}>
+            
+            </Nav>
+            
+
             <div className="heading_animation">
               <h2>Search any Github user here</h2>
               
-            </div>{
-              successSignup?(<div className="success_alert"><p>Signed Up successfully please login</p></div>):null
-            }
-            
+            </div>
+           
             <Search setTrigger={setModal} />
 
 
